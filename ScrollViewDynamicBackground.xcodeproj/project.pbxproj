@@ -19,6 +19,7 @@
 /* Begin PBXFileReference section */
 		5C1293E62A56BFB10018878E /* ScrollViewPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPreferenceKey.swift; sourceTree = "<group>"; };
 		5C1293E92A56C6680018878E /* View+onRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onRotate.swift"; sourceTree = "<group>"; };
+		5C1293EC2A56D7E00018878E /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5C8B86A82A55AD790085F378 /* BackgroundedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundedScrollView.swift; sourceTree = "<group>"; };
 		5CB729642A557AC400B7FCD4 /* ScrollViewDynamicBackground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollViewDynamicBackground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB729672A557AC400B7FCD4 /* ScrollViewDynamicBackgroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDynamicBackgroundApp.swift; sourceTree = "<group>"; };
@@ -66,6 +67,7 @@
 		5CB7295B2A557AC400B7FCD4 = {
 			isa = PBXGroup;
 			children = (
+				5C1293EC2A56D7E00018878E /* README.md */,
 				5CB729662A557AC400B7FCD4 /* ScrollViewDynamicBackground */,
 				5CB729652A557AC400B7FCD4 /* Products */,
 			);
