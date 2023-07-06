@@ -10,10 +10,21 @@ import SwiftUI
 struct BackgroundedScrollView<Content: View>: View {
     
     private let backgroundImage: Image
+    private let axes: Axis.Set
+    private let showsIndicators: Bool
     private let content: Content
     
-    init(backgroundImage: Image, @ViewBuilder content: @escaping () -> Content) {
+    /// A scrollable view with a scrolling background corresponding to the scroll position in the content.
+    /// - Parameters:
+    ///   - backgroundImage: the image to scroll in the background of the ScrollView.
+    ///   - content: the content of the ScrollView
+    init(backgroundImage: Image,
+         axes: Axis.Set = .vertical,
+         showsIndicators: Bool = true,
+         @ViewBuilder content: @escaping () -> Content) {
         self.backgroundImage = backgroundImage
+        self.axes = axes
+        self.showsIndicators = showsIndicators
         self.content = content()
     }
     
@@ -46,7 +57,7 @@ struct BackgroundedScrollView<Content: View>: View {
     
     
     var body: some View {
-        ScrollView {
+        ScrollView(axes, showsIndicators: showsIndicators) {
             ZStack {
                 content
             }
@@ -102,7 +113,6 @@ struct BackgroundedScrollView<Content: View>: View {
         }
         .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { newValue in
             scrollViewOffset = newValue
-            print("scrollViewOffset \(scrollViewOffset)")
         }
     }
     
