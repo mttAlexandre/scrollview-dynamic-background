@@ -39,6 +39,10 @@ struct BackgroundedScrollView<Content: View>: View {
     // current offset (position) in the scroll content
     @State private var scrollViewOffset: CGFloat = 0
     
+    
+    @State private var rotationId = UUID()
+    
+    
     var body: some View {
         ScrollView {
             ZStack {
@@ -51,32 +55,32 @@ struct BackgroundedScrollView<Content: View>: View {
                     // Read the scrollview current offset (position)
                     // https://developer.apple.com/forums/thread/650312
                     let offset = proxy.frame(in: .named("scroll")).minY
-                    Color.clear.preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                     
-                    Color.clear.onAppear {
-                        scrollViewContentHeight = proxy.size.height
-                        print("scrollViewContentHeight : \(scrollViewContentHeight)")
-                        
-                        scrollViewMaxOffset = scrollViewContentHeight - scrollViewHeight
-                        print("scrollViewMaxOffset : \(scrollViewMaxOffset)")
-                    }
+                    Color.clear
+                        .preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
+                        .onAppear {
+                            scrollViewContentHeight = proxy.size.height
+                            print("scrollViewContentHeight : \(scrollViewContentHeight)")
+                            
+                            scrollViewMaxOffset = scrollViewContentHeight - scrollViewHeight
+                            print("scrollViewMaxOffset : \(scrollViewMaxOffset)")
+                        }
+                        .id(rotationId)
                 }
             )
         }
         .coordinateSpace(name: "scroll")
-        .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-            print(value)
-            scrollViewOffset = value
-        }
         .background(
             GeometryReader { proxy in
-                Color.clear.onAppear {
-                    scrollViewHeight = proxy.size.height
-                    print("scrollViewHeight : \(scrollViewHeight)")
-                    
-                    backgroundImageMaxOffset = backgroundImageContentHeight - scrollViewHeight
-                    print("backgroundImageMaxOffset \(backgroundImageMaxOffset)")
-                }
+                Color.clear
+                    .onAppear {
+                        scrollViewHeight = proxy.size.height
+                        print("scrollViewHeight : \(scrollViewHeight)")
+                        
+                        backgroundImageMaxOffset = backgroundImageContentHeight - scrollViewHeight
+                        print("backgroundImageMaxOffset \(backgroundImageMaxOffset)")
+                    }
+                    .id(rotationId)
             }
         )
         .background {
@@ -89,12 +93,21 @@ struct BackgroundedScrollView<Content: View>: View {
                 .background(
                     // Read the backgroundImageContentHeight
                     GeometryReader { proxy in
-                        Color.clear.onAppear {
-                            backgroundImageContentHeight = proxy.size.height
-                            print("backgroundImageContentHeight \(backgroundImageContentHeight)")
-                        }
+                        Color.clear
+                            .onAppear {
+                                backgroundImageContentHeight = proxy.size.height
+                                print("backgroundImageContentHeight \(backgroundImageContentHeight)")
+                            }
                     }
                 )
+                .id(rotationId)
+        }
+        .onRotate { _ in
+            rotationId = UUID()
+        }
+        .onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { newValue in
+            scrollViewOffset = newValue
+            print("scrollViewOffset \(scrollViewOffset)")
         }
     }
     
@@ -110,14 +123,6 @@ struct BackgroundedScrollView<Content: View>: View {
         if scrollViewOffset < -scrollViewMaxOffset { return -backgroundImageMaxOffset + centerOffset }
         
         return (scrollViewOffset * backgroundImageMaxOffset / scrollViewMaxOffset) + centerOffset
-    }
-}
-
-private struct ScrollViewOffsetPreferenceKey: PreferenceKey {
-    typealias Value = CGFloat
-    static var defaultValue = CGFloat.zero
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value += nextValue()
     }
 }
 

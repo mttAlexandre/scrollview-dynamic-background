@@ -7,22 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C1293E72A56BFB10018878E /* ScrollViewPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1293E62A56BFB10018878E /* ScrollViewPreferenceKey.swift */; };
+		5C1293EA2A56C6680018878E /* View+onRotate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1293E92A56C6680018878E /* View+onRotate.swift */; };
 		5C8B86A92A55AD790085F378 /* BackgroundedScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C8B86A82A55AD790085F378 /* BackgroundedScrollView.swift */; };
 		5CB729682A557AC400B7FCD4 /* ScrollViewDynamicBackgroundApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB729672A557AC400B7FCD4 /* ScrollViewDynamicBackgroundApp.swift */; };
 		5CB7296A2A557AC400B7FCD4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CB729692A557AC400B7FCD4 /* ContentView.swift */; };
 		5CB7296C2A557AC500B7FCD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7296B2A557AC500B7FCD4 /* Assets.xcassets */; };
 		5CB7296F2A557AC500B7FCD4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5CB7296E2A557AC500B7FCD4 /* Preview Assets.xcassets */; };
-		5CB729762A557C3600B7FCD4 /* Screenshot 2023-07-05 at 12.23.41.png in Resources */ = {isa = PBXBuildFile; fileRef = 5CB729752A557C3600B7FCD4 /* Screenshot 2023-07-05 at 12.23.41.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5C1293E62A56BFB10018878E /* ScrollViewPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewPreferenceKey.swift; sourceTree = "<group>"; };
+		5C1293E92A56C6680018878E /* View+onRotate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+onRotate.swift"; sourceTree = "<group>"; };
 		5C8B86A82A55AD790085F378 /* BackgroundedScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundedScrollView.swift; sourceTree = "<group>"; };
 		5CB729642A557AC400B7FCD4 /* ScrollViewDynamicBackground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScrollViewDynamicBackground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CB729672A557AC400B7FCD4 /* ScrollViewDynamicBackgroundApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewDynamicBackgroundApp.swift; sourceTree = "<group>"; };
 		5CB729692A557AC400B7FCD4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5CB7296B2A557AC500B7FCD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5CB7296E2A557AC500B7FCD4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		5CB729752A557C3600B7FCD4 /* Screenshot 2023-07-05 at 12.23.41.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2023-07-05 at 12.23.41.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +38,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C1293E52A56BFA00018878E /* PreferenceKeys */ = {
+			isa = PBXGroup;
+			children = (
+				5C1293E62A56BFB10018878E /* ScrollViewPreferenceKey.swift */,
+			);
+			path = PreferenceKeys;
+			sourceTree = "<group>";
+		};
+		5C1293E82A56C65A0018878E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5C1293E92A56C6680018878E /* View+onRotate.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5CB7295B2A557AC400B7FCD4 = {
 			isa = PBXGroup;
 			children = (
@@ -55,7 +73,8 @@
 		5CB729662A557AC400B7FCD4 /* ScrollViewDynamicBackground */ = {
 			isa = PBXGroup;
 			children = (
-				5CB729752A557C3600B7FCD4 /* Screenshot 2023-07-05 at 12.23.41.png */,
+				5C1293E82A56C65A0018878E /* Extensions */,
+				5C1293E52A56BFA00018878E /* PreferenceKeys */,
 				5C8B86A82A55AD790085F378 /* BackgroundedScrollView.swift */,
 				5CB729692A557AC400B7FCD4 /* ContentView.swift */,
 				5CB729672A557AC400B7FCD4 /* ScrollViewDynamicBackgroundApp.swift */,
@@ -133,7 +152,6 @@
 			files = (
 				5CB7296F2A557AC500B7FCD4 /* Preview Assets.xcassets in Resources */,
 				5CB7296C2A557AC500B7FCD4 /* Assets.xcassets in Resources */,
-				5CB729762A557C3600B7FCD4 /* Screenshot 2023-07-05 at 12.23.41.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +165,8 @@
 				5CB7296A2A557AC400B7FCD4 /* ContentView.swift in Sources */,
 				5CB729682A557AC400B7FCD4 /* ScrollViewDynamicBackgroundApp.swift in Sources */,
 				5C8B86A92A55AD790085F378 /* BackgroundedScrollView.swift in Sources */,
+				5C1293EA2A56C6680018878E /* View+onRotate.swift in Sources */,
+				5C1293E72A56BFB10018878E /* ScrollViewPreferenceKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
