@@ -52,8 +52,7 @@ Few examples are available in **BackgroundedScrollView.swift** previews.
                 .scaledToFill()
         }
 ```
-
-![Simulator Screen Recording - iPhone 14 Pro - 2023-07-06 at 14 38 55](https://github.com/mttAlexandre/scrollview-dynamic-background/assets/44088470/dca3a160-c731-41eb-a74d-30a237ef27e1)
+![Simulator Screen Recording - iPhone 14 Pro - 2023-07-06 at 14 38 55](https://github.com/mttAlexandre/scrollview-dynamic-background/assets/44088470/ab072af4-a62a-49f7-9cf5-9ff682cfd6e1)
 
 ### Custom View as background
 
@@ -92,7 +91,7 @@ Few examples are available in **BackgroundedScrollView.swift** previews.
         }
 ```
 
-![Simulator Screen Recording - iPhone 14 Pro - 2023-07-06 at 14 34 58](https://github.com/mttAlexandre/scrollview-dynamic-background/assets/44088470/0d7b5b00-bb92-432d-acea-2565ed6f1d51)
+![Simulator Screen Recording - iPhone 14 Pro - 2023-07-06 at 14 34 58](https://github.com/mttAlexandre/scrollview-dynamic-background/assets/44088470/b65f0f29-42ed-42b2-add3-84d9cf579992)
 
 
 # Ressources
