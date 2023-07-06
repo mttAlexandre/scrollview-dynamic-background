@@ -54,6 +54,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5C1293EB2A56CEED0018878E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5CB729692A557AC400B7FCD4 /* ContentView.swift */,
+				5C8B86A82A55AD790085F378 /* BackgroundedScrollView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5CB7295B2A557AC400B7FCD4 = {
 			isa = PBXGroup;
 			children = (
@@ -73,13 +82,12 @@
 		5CB729662A557AC400B7FCD4 /* ScrollViewDynamicBackground */ = {
 			isa = PBXGroup;
 			children = (
-				5C1293E82A56C65A0018878E /* Extensions */,
-				5C1293E52A56BFA00018878E /* PreferenceKeys */,
-				5C8B86A82A55AD790085F378 /* BackgroundedScrollView.swift */,
-				5CB729692A557AC400B7FCD4 /* ContentView.swift */,
 				5CB729672A557AC400B7FCD4 /* ScrollViewDynamicBackgroundApp.swift */,
 				5CB7296B2A557AC500B7FCD4 /* Assets.xcassets */,
+				5C1293E82A56C65A0018878E /* Extensions */,
+				5C1293E52A56BFA00018878E /* PreferenceKeys */,
 				5CB7296D2A557AC500B7FCD4 /* Preview Content */,
+				5C1293EB2A56CEED0018878E /* Views */,
 			);
 			path = ScrollViewDynamicBackground;
 			sourceTree = "<group>";

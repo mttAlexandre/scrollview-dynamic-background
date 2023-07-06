@@ -39,7 +39,9 @@ struct BackgroundedScrollView<Content: View>: View {
     // current offset (position) in the scroll content
     @State private var scrollViewOffset: CGFloat = 0
     
-    
+    // id used to redraw some view when device rotation changes
+    // it helps to refresh some height/offset states value which gets initiated in 'onAppear'
+    // modifier. Because 'onAppear' is not recalled after orientation change.
     @State private var rotationId = UUID()
     
     
@@ -60,10 +62,7 @@ struct BackgroundedScrollView<Content: View>: View {
                         .preference(key: ScrollViewOffsetPreferenceKey.self, value: offset)
                         .onAppear {
                             scrollViewContentHeight = proxy.size.height
-                            print("scrollViewContentHeight : \(scrollViewContentHeight)")
-                            
                             scrollViewMaxOffset = scrollViewContentHeight - scrollViewHeight
-                            print("scrollViewMaxOffset : \(scrollViewMaxOffset)")
                         }
                         .id(rotationId)
                 }
@@ -72,36 +71,32 @@ struct BackgroundedScrollView<Content: View>: View {
         .coordinateSpace(name: "scroll")
         .background(
             GeometryReader { proxy in
-                Color.clear
-                    .onAppear {
-                        scrollViewHeight = proxy.size.height
-                        print("scrollViewHeight : \(scrollViewHeight)")
-                        
-                        backgroundImageMaxOffset = backgroundImageContentHeight - scrollViewHeight
-                        print("backgroundImageMaxOffset \(backgroundImageMaxOffset)")
-                    }
-                    .id(rotationId)
+                ZStack {
+                    Color.clear
+                        .onAppear {
+                            scrollViewHeight = proxy.size.height
+                            backgroundImageMaxOffset = backgroundImageContentHeight - scrollViewHeight
+                        }
+                    
+                    backgroundImage
+                    // resize image to fill all scrollview background
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        .offset(y: getImageOffset())
+                        .background(
+                            // Read the backgroundImageContentHeight
+                            GeometryReader { proxy in
+                                Color.clear
+                                    .onAppear {
+                                        backgroundImageContentHeight = proxy.size.height
+                                    }
+                            }
+                        )
+                }
+                .id(rotationId)
             }
         )
-        .background {
-            backgroundImage
-            // resize image to fill all scrollview background
-                .resizable()
-                .scaledToFill()
-                .frame(maxHeight: .infinity, alignment: .top)
-                .offset(y: getImageOffset())
-                .background(
-                    // Read the backgroundImageContentHeight
-                    GeometryReader { proxy in
-                        Color.clear
-                            .onAppear {
-                                backgroundImageContentHeight = proxy.size.height
-                                print("backgroundImageContentHeight \(backgroundImageContentHeight)")
-                            }
-                    }
-                )
-                .id(rotationId)
-        }
         .onRotate { _ in
             rotationId = UUID()
         }
@@ -114,15 +109,11 @@ struct BackgroundedScrollView<Content: View>: View {
     /// Compute the scroll offset to apply to the background image to match the scrollview content position.
     /// - Returns: the offset to apply the the background image
     private func getImageOffset() -> CGFloat {
-        // the image is vertically centered in the background
-        // so we should had the offset to start at the top
-        let centerOffset = (backgroundImageContentHeight - scrollViewHeight) / 2
-        
         // avoid bounce of the background image when we reach scroll limit
-        if scrollViewOffset > 0 { return centerOffset }
-        if scrollViewOffset < -scrollViewMaxOffset { return -backgroundImageMaxOffset + centerOffset }
+        if scrollViewOffset > 0 { return 0 }
+        if scrollViewOffset < -scrollViewMaxOffset { return -backgroundImageMaxOffset }
         
-        return (scrollViewOffset * backgroundImageMaxOffset / scrollViewMaxOffset) + centerOffset
+        return scrollViewOffset * backgroundImageMaxOffset / scrollViewMaxOffset
     }
 }
 

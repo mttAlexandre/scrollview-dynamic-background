@@ -10,8 +10,7 @@ import SwiftUI
 
 // credit to https://www.hackingwithswift.com/quick-start/swiftui/how-to-detect-device-rotation
 
-// Our custom view modifier to track rotation and
-// call our action
+// Our custom view modifier to track rotation and call our action
 private struct DeviceRotationViewModifier: ViewModifier {
     let action: (UIDeviceOrientation) -> Void
     
