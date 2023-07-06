@@ -7,25 +7,27 @@
 
 import SwiftUI
 
-struct BackgroundedScrollView<Content: View>: View {
+struct BackgroundedScrollView<Content: View, Background: View>: View {
     
-    private let backgroundImage: Image
     private let axes: Axis.Set
     private let showsIndicators: Bool
     private let content: Content
+    private let background: Background
     
     /// A scrollable view with a scrolling background corresponding to the scroll position in the content.
     /// - Parameters:
-    ///   - backgroundImage: the image to scroll in the background of the ScrollView.
+    ///   - axes: axes of the ScrollView
+    ///   - showsIndicators: showsIndicators in the ScrollView
     ///   - content: the content of the ScrollView
-    init(backgroundImage: Image,
-         axes: Axis.Set = .vertical,
+    ///   - background: a view to scroll in the background of the ScrollView.
+    init(axes: Axis.Set = .vertical,
          showsIndicators: Bool = true,
-         @ViewBuilder content: @escaping () -> Content) {
-        self.backgroundImage = backgroundImage
+         @ViewBuilder content: @escaping () -> Content,
+         @ViewBuilder background: @escaping () -> Background) {
         self.axes = axes
         self.showsIndicators = showsIndicators
         self.content = content()
+        self.background = background()
     }
     
     // height of the scrollview in the screen
@@ -89,11 +91,7 @@ struct BackgroundedScrollView<Content: View>: View {
                             backgroundImageMaxOffset = backgroundImageContentHeight - scrollViewHeight
                         }
                     
-                    backgroundImage
-                    // resize image to fill all scrollview background
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxHeight: .infinity, alignment: .top)
+                    background
                         .offset(y: getImageOffset())
                         .background(
                             // Read the backgroundImageContentHeight
@@ -129,7 +127,9 @@ struct BackgroundedScrollView<Content: View>: View {
 
 struct BackgroundedScrollView_Previews: PreviewProvider {
     static var previews: some View {
-        BackgroundedScrollView(backgroundImage: Image("background")) {
+        
+        // the preview seems broken for this example
+        BackgroundedScrollView {
             VStack(alignment: .leading) {
                 ForEach(0...50, id:\.self) { item in
                     Text(String(item))
@@ -142,6 +142,65 @@ struct BackgroundedScrollView_Previews: PreviewProvider {
                 }
             }
             .frame(maxWidth: .infinity)
+        } background: {
+            Image("background")
+                .resizable()
+                .scaledToFill()
+        }
+        
+        BackgroundedScrollView {
+            VStack(alignment: .leading) {
+                ForEach(0...50, id:\.self) { item in
+                    Text(String(item))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .bold()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 25)
+                    
+                    Divider()
+                }
+            }
+            .frame(maxWidth: .infinity)
+        } background: {
+            VStack(spacing: 0) {
+                Color.green
+                    .frame(height: 200)
+                    .opacity(0.3)
+                Color.yellow
+                    .frame(height: 200)
+                    .opacity(0.3)
+                Color.orange
+                    .frame(height: 200)
+                    .opacity(0.3)
+                Color.red
+                    .frame(height: 200)
+                    .opacity(0.3)
+                Color.purple
+                    .frame(height: 200)
+                    .opacity(0.3)
+            }
+        }
+        
+        BackgroundedScrollView {
+            VStack(alignment: .leading) {
+                ForEach(0...50, id:\.self) { item in
+                    Text(String(item))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .bold()
+                        .padding(.vertical, 5)
+                        .padding(.horizontal, 25)
+                    
+                    Divider()
+                }
+            }
+            .frame(maxWidth: .infinity)
+        } background: {
+            LinearGradient(
+                gradient: Gradient(colors: [.green, .yellow, .orange, .red, .purple]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .frame(height: 5000)
         }
     }
 }

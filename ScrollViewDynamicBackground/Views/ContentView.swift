@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        BackgroundedScrollView(backgroundImage: Image("background")) {
+        BackgroundedScrollView {
             VStack(alignment: .leading) {
                 ForEach(0...50, id:\.self) { item in
                     Text(String(item))
@@ -23,6 +23,24 @@ struct ContentView: View {
                 }
             }
             .frame(maxWidth: .infinity)
+        } background: {
+            VStack(spacing: 0) {
+                Color.green
+                    .frame(height: 200)
+                    .opacity(0.3)
+                Color.yellow
+                    .frame(height: 200)
+                    .opacity(0.3)
+                Color.orange
+                    .frame(height: 200)
+                    .opacity(0.3)
+                Color.red
+                    .frame(height: 200)
+                    .opacity(0.3)
+                Color.purple
+                    .frame(height: 200)
+                    .opacity(0.3)
+            }
         }
     }
 }
